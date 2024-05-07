@@ -6,3 +6,8 @@ data_ingestion:
   dataset_name: tmdb/tmdb-movie-metadata
   local_data_file: artifacts/data_ingestion
   unzip_dir: artifacts/data_ingestion
+
+data_organize:
+  movie_table_path: artifacts/data_ingestion/tmdb_5000_movies.csv
+  credit_table_path: artifacts/data_ingestion/tmdb_5000_credits.csv
+  org_table_path: artifacts/organized_data
