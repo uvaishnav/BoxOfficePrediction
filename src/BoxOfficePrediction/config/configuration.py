@@ -17,6 +17,8 @@ class ConfugarationManager:
         data_ingestion_config = DataIngestionConfig(
             root_dir= config.root_dir,
             dataset_name= config.dataset_name,
+            ticket_price_dataset_link = config.ticket_price_dataset_link,
+            ticket_price_file = config.ticket_price_file,
             local_data_file= config.local_data_file,
             unzip_dir= config.unzip_dir
         )
@@ -35,5 +37,4 @@ class ConfugarationManager:
         )
 
         return data_organize_config
-    
     

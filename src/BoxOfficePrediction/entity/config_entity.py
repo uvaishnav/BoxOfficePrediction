@@ -6,6 +6,8 @@ from pathlib import Path
 class DataIngestionConfig:
     root_dir : Path
     dataset_name : str
+    ticket_price_dataset_link : str
+    ticket_price_file : Path
     local_data_file : Path
     unzip_dir : Path
 

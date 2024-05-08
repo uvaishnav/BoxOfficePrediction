@@ -4,6 +4,8 @@ artifacts_root: artifacts
 data_ingestion:
   root_dir: artifacts/data_ingestion
   dataset_name: tmdb/tmdb-movie-metadata
+  ticket_price_dataset_link : https://docs.google.com/spreadsheets/d/e/2PACX-1vSit8SB8zhzoRkcdCpOnTNgatlFQFb6FqG_IabDTcJ66nEPx_36bE2UR4ck-fiXWFsMVmqUpodTbcxL/pub?gid=0&single=true&output=csv
+  ticket_price_file : artifacts/data_ingestion/ticket_prices.csv
   local_data_file: artifacts/data_ingestion
   unzip_dir: artifacts/data_ingestion
 
