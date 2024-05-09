@@ -49,7 +49,20 @@ class DataIngestion:
 
         zip_data = os.listdir(self.config.local_data_file)
         logger.info("we have {} in {}".format(zip_data,self.config.local_data_file))
-        zip_data_path = os.path.join(self.config.local_data_file, zip_data[0])
+        
+        # Find the zip file
+        zip_file = None
+        for file in zip_data:
+            if file.endswith(".zip"):
+                zip_file = file
+                break
+        
+        if zip_file is None:
+            logger.error("No zip file found in {}".format(self.config.local_data_file))
+            return
+        
+        zip_data_path = os.path.join(self.config.local_data_file, zip_file)
+
 
         with zipfile.ZipFile(zip_data_path, 'r') as zip_ref:
             zip_ref.extractall(unzip_path)

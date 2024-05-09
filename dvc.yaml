@@ -5,4 +5,6 @@ stages:
       - src/BoxOfficePrediction/pipeline/stage01_data_ingestion.py
       - config/config.yaml
     outs :
-      - artifacts/data_ingestion
+      - artifacts/data_ingestion/tmdb_5000_credits.csv
+      - artifacts/data_ingestion/tmdb_5000_movies.csv
+      - artifacts/data_ingestion/ticket_prices.csv
