@@ -1,1 +1,18 @@
-key : value
+COLUMNS :
+  budget       :             int64
+  genres        :           object
+  original_language   :     object
+  popularity        :      float64
+  production_companies  :   object
+  production_countries :    object
+  revenue            :       int64
+  runtime             :    float64
+  spoken_languages   :      object
+  status             :      object
+  vote_average       :     float64
+  vote_count        :        int64
+  crew             :        object
+  release_month     :       object
+  avg_ticket_price    :    float64
+  hero              :       object
+  heroine           :       object

@@ -1,11 +1,13 @@
 from BoxOfficePrediction.constants import *
 from BoxOfficePrediction.utils.common import read_yaml, create_directories
-from BoxOfficePrediction.entity.config_entity import DataIngestionConfig,DataOrganizeConfig
+from BoxOfficePrediction.entity.config_entity import DataIngestionConfig,DataOrganizeConfig,DataValidatioinConfig
 
 class ConfugarationManager:
-    def __init__(self,config_file_path = CONFIG_FILE_PATH, param_file_path = PARAMS_FILE_PATH):
+    def __init__(self,config_file_path = CONFIG_FILE_PATH, param_file_path = PARAMS_FILE_PATH, schema_file_path = SCHEMA_FILE_PATH):
         self.config = read_yaml(config_file_path)
         self.params = read_yaml(param_file_path)
+        self.schema = read_yaml(schema_file_path)
+
 
         create_directories([self.config.artifacts_root])
     
@@ -38,4 +40,18 @@ class ConfugarationManager:
         )
 
         return data_organize_config
+    
+    def get_data_validation_config(self)->DataValidatioinConfig:
+        config = self.config.data_validation
+
+        create_directories([config.root_dir])
+
+        data_validation_config = DataValidatioinConfig(
+            root_dir = config.root_dir,
+            val_data_path = config.val_data_path,
+            all_schema = self.schema.COLUMNS,
+            status_file = config.status_file
+        )
+
+        return data_validation_config
     

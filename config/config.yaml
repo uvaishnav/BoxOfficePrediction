@@ -15,7 +15,7 @@ data_organize:
   ticket_price_table_path : artifacts/data_ingestion/ticket_prices.csv
   org_table_path: artifacts/data_transform
 
-# data_validation:
-#   root_dir : artifacts/data_validation
-#   val_data_path : artifacts/data_transform/organized_cinema.csv
-#   status_file : artifacts/data_validation.txt
+data_validation:
+  root_dir : artifacts/data_validation
+  val_data_path : artifacts/data_transform/organized_cinema.csv
+  status_file : artifacts/data_validation/status.txt

@@ -19,3 +19,12 @@ stages:
       - artifacts/data_ingestion/tmdb_5000_movies.csv
     outs:
       - artifacts/data_transform/organized_cinema.csv
+
+  data_validation:
+    cmd: python src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
+    deps:
+      - src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
+      - config/config.yaml
+      - schema.yaml
+    outs:
+      - artifacts/data_validation/status.txt

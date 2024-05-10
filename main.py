@@ -21,3 +21,13 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     raise e
+
+
+STAGE_NAME = "DATA VALIDATION"
+try:
+    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+    data_validation = DataValidatioinPipeline()
+    data_validation.main()
+    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+    raise e

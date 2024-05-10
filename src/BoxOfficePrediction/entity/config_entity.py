@@ -18,3 +18,9 @@ class DataOrganizeConfig:
     ticket_price_table_path : Path
     org_table_path : Path
 
+@dataclass(frozen=True)
+class DataValidatioinConfig:
+    root_dir : Path
+    val_data_path : Path
+    all_schema : dict
+    status_file : Path

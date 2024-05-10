@@ -5,8 +5,8 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 755b8070f95a0c09c795a66269b11873
-      size: 898
+      md5: df79d8eb6ae608f94269a288a75b8b91
+      size: 897
     - path: src/BoxOfficePrediction/pipeline/stage01_data_ingestion.py
       hash: md5
       md5: 2fe3f484cd0d0a29bf7487a1a1a5ed98
@@ -44,8 +44,8 @@ stages:
       size: 5698602
     - path: config/config.yaml
       hash: md5
-      md5: 755b8070f95a0c09c795a66269b11873
-      size: 898
+      md5: df79d8eb6ae608f94269a288a75b8b91
+      size: 897
     - path: src/BoxOfficePrediction/pipeline/stage02_data_organize.py
       hash: md5
       md5: 0936179bcac169766077dbe9be4788c3
@@ -55,4 +55,25 @@ stages:
       hash: md5
       md5: 1b4851160c8d2a4cf6b467d684c3fd3c
       size: 1191727
+      isexec: true
+  data_validation:
+    cmd: python src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: df79d8eb6ae608f94269a288a75b8b91
+      size: 897
+    - path: schema.yaml
+      hash: md5
+      md5: 006ac47a5c1cb98a2eba81eb6ed7f401
+      size: 604
+    - path: src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
+      hash: md5
+      md5: 6d87a93f33070ea1602f43d4c1e2bb26
+      size: 825
+    outs:
+    - path: artifacts/data_validation/status.txt
+      hash: md5
+      md5: ac3566ff88d9e9c9aa31c072ddb50d67
+      size: 70
       isexec: true
