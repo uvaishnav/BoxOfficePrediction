@@ -8,6 +8,8 @@ from ensure import ensure_annotations
 from box import ConfigBox
 from pathlib import Path
 from typing import Any
+from typing import List
+import pandas as pd
 
 
 
@@ -126,5 +128,13 @@ def get_size(path: Path) -> str:
     return f"~ {size_in_kb} KB"
 
 
+def remove_columns(data:pd.DataFrame, columns: List[str])->None:
+    """
+    Deletes the specified columns in the given DataFrame
 
+    Args:
+        DataFrame,
+        list of columns to delete
+    """
 
+    data.drop(columns,axis=1,inplace=True)

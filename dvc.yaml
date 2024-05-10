@@ -8,3 +8,14 @@ stages:
       - artifacts/data_ingestion/tmdb_5000_credits.csv
       - artifacts/data_ingestion/tmdb_5000_movies.csv
       - artifacts/data_ingestion/ticket_prices.csv
+
+  data_organize:
+    cmd: python src/BoxOfficePrediction/pipeline/stage02_data_organize.py
+    deps:
+      - src/BoxOfficePrediction/pipeline/stage02_data_organize.py
+      - config/config.yaml
+      - artifacts/data_ingestion/ticket_prices.csv
+      - artifacts/data_ingestion/tmdb_5000_credits.csv
+      - artifacts/data_ingestion/tmdb_5000_movies.csv
+    outs:
+      - artifacts/data_transform/organized_cinema.csv

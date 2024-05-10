@@ -33,6 +33,7 @@ class ConfugarationManager:
         data_organize_config = DataOrganizeConfig(
             movie_table_path = config.movie_table_path,
             credit_table_path = config.credit_table_path,
+            ticket_price_table_path = config.ticket_price_table_path,
             org_table_path = config.org_table_path
         )
 

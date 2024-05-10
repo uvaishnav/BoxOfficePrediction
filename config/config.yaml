@@ -12,4 +12,10 @@ data_ingestion:
 data_organize:
   movie_table_path: artifacts/data_ingestion/tmdb_5000_movies.csv
   credit_table_path: artifacts/data_ingestion/tmdb_5000_credits.csv
-  org_table_path: artifacts/organized_data
+  ticket_price_table_path : artifacts/data_ingestion/ticket_prices.csv
+  org_table_path: artifacts/data_transform
+
+# data_validation:
+#   root_dir : artifacts/data_validation
+#   val_data_path : artifacts/data_transform/organized_cinema.csv
+#   status_file : artifacts/data_validation.txt

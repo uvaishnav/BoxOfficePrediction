@@ -15,5 +15,6 @@ class DataIngestionConfig:
 class DataOrganizeConfig:
     movie_table_path : Path
     credit_table_path : Path
+    ticket_price_table_path : Path
     org_table_path : Path
 
