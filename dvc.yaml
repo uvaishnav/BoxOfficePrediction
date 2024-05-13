@@ -28,3 +28,16 @@ stages:
       - schema.yaml
     outs:
       - artifacts/data_validation/status.txt
+  
+  feature_engineering:
+    cmd : python src/BoxOfficePrediction/pipeline/stage03_feature_engineering.py
+    deps :
+      - src/BoxOfficePrediction/pipeline/stage03_feature_engineering.py
+      - config/config.yaml
+      - artifacts/data_transform/organized_cinema.csv
+    outs:
+      - artifacts/data_scores/director_score.csv
+      - artifacts/data_scores/hero_score.csv
+      - artifacts/data_scores/heroine_score.csv
+      - artifacts/data_transform/train.csv
+      - artifacts/data_transform/test.csv

@@ -24,3 +24,9 @@ class DataValidatioinConfig:
     val_data_path : Path
     all_schema : dict
     status_file : Path
+
+@dataclass(frozen=True)
+class FeatureEngineeringConfig:
+    organized_data : Path
+    featured_data : Path
+    scores_data : Path
