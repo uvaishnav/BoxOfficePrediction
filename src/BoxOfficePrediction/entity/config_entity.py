@@ -30,3 +30,7 @@ class FeatureEngineeringConfig:
     organized_data : Path
     featured_data : Path
     scores_data : Path
+
+@dataclass(frozen=True)
+class DataPreprocessorConfig:
+    root_dir : Path

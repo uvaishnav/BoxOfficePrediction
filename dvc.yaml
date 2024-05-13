@@ -41,3 +41,10 @@ stages:
       - artifacts/data_scores/heroine_score.csv
       - artifacts/data_transform/train.csv
       - artifacts/data_transform/test.csv
+
+  data_preprocessing:
+    cmd : python src/BoxOfficePrediction/pipeline/stage04_data_preprocessing.py
+    deps :
+      - config/config.yaml
+    outs :
+      - models/preprocessor.pkl

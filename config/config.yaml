@@ -24,3 +24,7 @@ feature_engineering:
   organized_data : artifacts/data_transform/organized_cinema.csv
   featured_data : artifacts/data_transform
   scores_data : artifacts/data_scores
+
+data_preprocessing:
+  root_dir: models
+  

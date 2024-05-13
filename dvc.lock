@@ -5,8 +5,8 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 896f888f11b5050c3efec3f5f59f8b37
-      size: 1065
+      md5: 7e30da5c735c1a47ade3f9d5609f3882
+      size: 1108
     - path: src/BoxOfficePrediction/pipeline/stage01_data_ingestion.py
       hash: md5
       md5: 2fe3f484cd0d0a29bf7487a1a1a5ed98
@@ -44,8 +44,8 @@ stages:
       size: 5698602
     - path: config/config.yaml
       hash: md5
-      md5: 896f888f11b5050c3efec3f5f59f8b37
-      size: 1065
+      md5: 7e30da5c735c1a47ade3f9d5609f3882
+      size: 1108
     - path: src/BoxOfficePrediction/pipeline/stage02_data_organize.py
       hash: md5
       md5: 0936179bcac169766077dbe9be4788c3
@@ -61,8 +61,8 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 896f888f11b5050c3efec3f5f59f8b37
-      size: 1065
+      md5: 7e30da5c735c1a47ade3f9d5609f3882
+      size: 1108
     - path: schema.yaml
       hash: md5
       md5: 006ac47a5c1cb98a2eba81eb6ed7f401
@@ -86,8 +86,8 @@ stages:
       size: 1191727
     - path: config/config.yaml
       hash: md5
-      md5: 896f888f11b5050c3efec3f5f59f8b37
-      size: 1065
+      md5: 7e30da5c735c1a47ade3f9d5609f3882
+      size: 1108
     - path: src/BoxOfficePrediction/pipeline/stage03_feature_engineering.py
       hash: md5
       md5: 32bf9c053d732fde1932a31d6b552b76
@@ -110,11 +110,24 @@ stages:
       isexec: true
     - path: artifacts/data_transform/test.csv
       hash: md5
-      md5: c75d8d3746628a7db812f73a29d05e74
-      size: 87379
+      md5: ad6fdf7a3f5af536639dddd938fbe4f1
+      size: 87860
       isexec: true
     - path: artifacts/data_transform/train.csv
       hash: md5
-      md5: b07143ef2f36e333a4bccbd97e1d2a9c
-      size: 263758
+      md5: 23d2f280daa28e3eb3356566f58ca96b
+      size: 263277
+      isexec: true
+  data_preprocessing:
+    cmd: python src/BoxOfficePrediction/pipeline/stage04_data_preprocessing.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 7e30da5c735c1a47ade3f9d5609f3882
+      size: 1108
+    outs:
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: 7356370f1199d3a5c8469130a0712bdf
+      size: 2789
       isexec: true
