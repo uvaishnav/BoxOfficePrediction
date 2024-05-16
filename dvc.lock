@@ -5,8 +5,8 @@ stages:
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 7e30da5c735c1a47ade3f9d5609f3882
-      size: 1108
+      md5: 5173c0acd214989480d030dcf31f18e6
+      size: 1244
     - path: src/BoxOfficePrediction/pipeline/stage01_data_ingestion.py
       hash: md5
       md5: 2fe3f484cd0d0a29bf7487a1a1a5ed98
@@ -44,8 +44,8 @@ stages:
       size: 5698602
     - path: config/config.yaml
       hash: md5
-      md5: 7e30da5c735c1a47ade3f9d5609f3882
-      size: 1108
+      md5: 5173c0acd214989480d030dcf31f18e6
+      size: 1244
     - path: src/BoxOfficePrediction/pipeline/stage02_data_organize.py
       hash: md5
       md5: 0936179bcac169766077dbe9be4788c3
@@ -55,14 +55,13 @@ stages:
       hash: md5
       md5: 1b4851160c8d2a4cf6b467d684c3fd3c
       size: 1191727
-      isexec: true
   data_validation:
     cmd: python src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
     deps:
     - path: config/config.yaml
       hash: md5
-      md5: 7e30da5c735c1a47ade3f9d5609f3882
-      size: 1108
+      md5: 5173c0acd214989480d030dcf31f18e6
+      size: 1244
     - path: schema.yaml
       hash: md5
       md5: 006ac47a5c1cb98a2eba81eb6ed7f401
@@ -86,8 +85,12 @@ stages:
       size: 1191727
     - path: config/config.yaml
       hash: md5
-      md5: 7e30da5c735c1a47ade3f9d5609f3882
-      size: 1108
+      md5: 5173c0acd214989480d030dcf31f18e6
+      size: 1244
+    - path: src/BoxOfficePrediction/components/feature_engineering.py
+      hash: md5
+      md5: 88feec324919e309e8fc4522d365b5e3
+      size: 6755
     - path: src/BoxOfficePrediction/pipeline/stage03_feature_engineering.py
       hash: md5
       md5: 32bf9c053d732fde1932a31d6b552b76
@@ -95,28 +98,28 @@ stages:
     outs:
     - path: artifacts/data_scores/director_score.csv
       hash: md5
-      md5: 04cd83c7e9f150787ce83330e7190100
-      size: 47090
+      md5: 1299a2ff6d7c6e07640013a632b86e32
+      size: 47056
       isexec: true
     - path: artifacts/data_scores/hero_score.csv
       hash: md5
-      md5: 0bc2d3926eee29317a344899024bff26
-      size: 42242
+      md5: e12a64ce3e46c8dd5608d5e706204be1
+      size: 42208
       isexec: true
     - path: artifacts/data_scores/heroine_score.csv
       hash: md5
-      md5: 30612d7e31d5f2082b8efafaaf50622b
-      size: 58912
+      md5: de6d107615920490e20108c68293c6ab
+      size: 58911
       isexec: true
     - path: artifacts/data_transform/test.csv
       hash: md5
-      md5: ad6fdf7a3f5af536639dddd938fbe4f1
-      size: 87860
+      md5: 7bc2dfe5d8417304920755ce671ce873
+      size: 70307
       isexec: true
     - path: artifacts/data_transform/train.csv
       hash: md5
-      md5: 23d2f280daa28e3eb3356566f58ca96b
-      size: 263277
+      md5: d992e1b7930b109fb8481ff0698d3c81
+      size: 280715
       isexec: true
   data_preprocessing:
     cmd: python src/BoxOfficePrediction/pipeline/stage04_data_preprocessing.py
@@ -130,4 +133,60 @@ stages:
       hash: md5
       md5: 7356370f1199d3a5c8469130a0712bdf
       size: 2789
+      isexec: true
+  model_training:
+    cmd: python src/BoxOfficePrediction/pipeline/stage05_model_training.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 5173c0acd214989480d030dcf31f18e6
+      size: 1244
+    - path: src/BoxOfficePrediction/pipeline/stage04_data_preprocessing.py
+      hash: md5
+      md5: 36c8b83604f7f075b55e2e483558577c
+      size: 886
+    - path: src/BoxOfficePrediction/pipeline/stage05_model_training.py
+      hash: md5
+      md5: 6ac76d253f74bbed1a9989845d2dccda
+      size: 810
+    outs:
+    - path: models/AdaBoost_model.pkl
+      hash: md5
+      md5: 9599208d04c4d8202890cb34725964f6
+      size: 65325
+      isexec: true
+    - path: models/CatBoost_model.pkl
+      hash: md5
+      md5: 903f8419b52792dbe8a560b6038e73a0
+      size: 439579
+      isexec: true
+    - path: models/DecisionTree_model.pkl
+      hash: md5
+      md5: 4d7959ce5daba758a33c84d5126f93dd
+      size: 4435
+      isexec: true
+    - path: models/GradientBoosting_model.pkl
+      hash: md5
+      md5: cf736dbd10f06259f2660de2d5b80a08
+      size: 528438
+      isexec: true
+    - path: models/LinearRegression_model.pkl
+      hash: md5
+      md5: 5e3fb03334ad44e0576a24849d50a691
+      size: 846
+      isexec: true
+    - path: models/RandomForest_model.pkl
+      hash: md5
+      md5: a21b5e7be5b6e12d98b3ee5aa3cbb3c3
+      size: 4547973
+      isexec: true
+    - path: models/XGBoost_model.pkl
+      hash: md5
+      md5: 164642db61b300be0dc5be75fb179559
+      size: 3647903
+      isexec: true
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: 4de54bd7b98b13980cfb2d0a689dc4c8
+      size: 13610
       isexec: true

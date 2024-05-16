@@ -34,3 +34,13 @@ class FeatureEngineeringConfig:
 @dataclass(frozen=True)
 class DataPreprocessorConfig:
     root_dir : Path
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    train_data : Path
+    preprocessor_path : Path
+    model_path : Path
+    n_iter : int
+    scoring : str
+    cv : int
+    target_column : str

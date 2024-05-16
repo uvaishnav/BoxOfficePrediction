@@ -4,6 +4,8 @@ dvc
 notebook
 numpy
 scikit-learn
+catboost
+xgboost
 matplotlib
 seaborn
 python-box==6.0.2

@@ -1,1 +1,8 @@
 /preprocessor.pkl
+/RandomForest_model.pkl
+/DecisionTree_model.pkl
+/GradientBoosting_model.pkl
+/LinearRegression_model.pkl
+/XGBoost_model.pkl
+/CatBoost_model.pkl
+/AdaBoost_model.pkl

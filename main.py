@@ -3,7 +3,7 @@ from BoxOfficePrediction.pipeline.stage01_data_ingestion import DataIngestionPip
 from BoxOfficePrediction.pipeline.stage02_data_organize import DataOrganizePipeline
 from BoxOfficePrediction.pipeline.stage_data_validatioin import DataValidatioinPipeline
 from BoxOfficePrediction.pipeline.stage03_feature_engineering import FeatureEngineeringPipeline
-from BoxOfficePrediction.pipeline.stage04_data_preprocessing import DataPreprocessorPipeline
+from BoxOfficePrediction.pipeline.stage05_model_training import ModelTrainingPipeline
 
 STAGE_NAME = "Data Ingestion Stage"
 try:
@@ -45,11 +45,20 @@ except Exception as e:
     raise e
 
 
-STAGE_NAME = 'GET PREPROCSSING OBJECT'
+# STAGE_NAME = 'GET PREPROCSSING OBJECT'
+# try:
+#     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+#     data_preprocessor = DataPreprocessorPipeline()
+#     data_preprocessor.main()
+#     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+# except Exception as e:
+#     raise e
+
+STAGE_NAME = "MODEL TRAINING"
 try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
-    data_preprocessor = DataPreprocessorPipeline()
-    data_preprocessor.main()
+    model_trainer = ModelTrainingPipeline()
+    model_trainer.main()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     raise e

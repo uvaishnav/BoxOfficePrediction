@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+import ast
 
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
@@ -18,17 +19,20 @@ import joblib
 # Custom transformer for getting scores from CSV files
 
 class ScoresFromCsvTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, category) -> None:
+    def __init__(self, category):
         self.category = category
         self.director_scores = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQvkS0pEG7bYLkROOqa_5fBRtU92kBjUqcsOpGmSNHb_Hh7Q9b6Haf2pO0CnDDcPi8IbzmlMvJjYhc4/pub?gid=1457223827&single=true&output=csv'
         self.hero_scores = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSn0EY0v8Oqg-uLvLrxbGMV0-Wfkt5oHdNdOetZIz2ykeJMfMDCiiWxyEHD5PuvGtBV3r5cJj4nN8lO/pub?gid=2115785350&single=true&output=csv'
-        self.heroine_scores = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS2qQq80RVgVIg5KH4THgA5Qz2ahcyhlnJ0UTGOmMC6cPqY1hUDa1cEVnPCYkbIeTLiLVMT5sBz9sSn/pub?gid=826200949&single=true&output=csv'
-
+        self.heroine_scores = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vThFs2Qwa2_ueOmhhVeWCU2ly6xUQG07UAQfs5jceiHj0IH70ebtmy8clpx64kR4sM-CwJsOmJQFhhO/pub?gid=597603140&single=true&output=csv'
+    
     @staticmethod
     def get_scores_from_csv(x,category_link,category_name):
+        logger.info("Shape of data given to get_scores_function : {}".format(x.shape))
+        logger.info("Started extracting {} scores".format(category_name))
         data = pd.read_csv(category_link)
         scores = []
-        for name in x:
+        for index, row in x.iterrows():
+            name = row[0]  # Assuming the name is in the first column of the DataFrame
             if name in data[category_name].values:
                 score = data.loc[data[category_name] == name, 'score'].iloc[0]
                 scores.append(score)
@@ -37,6 +41,8 @@ class ScoresFromCsvTransformer(BaseEstimator, TransformerMixin):
                 median_score = data['score'].median()
                 scores.append(median_score)
         
+        logger.info("Extracted {} scores".format(category_name))
+        logger.info("no.of entries in scores : {}".format(len(scores)))
         return scores
     
     def fit(self,x,y=None):
@@ -46,18 +52,38 @@ class ScoresFromCsvTransformer(BaseEstimator, TransformerMixin):
 
         if self.category == 'crew':
             scores = ScoresFromCsvTransformer.get_scores_from_csv(x,self.director_scores,'crew')
-            return np.array(scores).reshape(-1, 1)
+            scores_series = pd.Series(scores)
+            return scores_series.values.reshape(-1, 1)
         
         elif self.category == 'hero':
             scores = ScoresFromCsvTransformer.get_scores_from_csv(x,self.hero_scores,'hero')
-            return np.array(scores).reshape(-1, 1)
+            scores_series = pd.Series(scores)
+            return scores_series.values.reshape(-1, 1)
         
         elif self.category == 'heroine':
             scores = ScoresFromCsvTransformer.get_scores_from_csv(x,self.heroine_scores,'heroine')
-            return np.array(scores).reshape(-1, 1)
+            scores_series = pd.Series(scores)
+            return scores_series.values.reshape(-1, 1)
         else:
             return None
+        
 
+
+
+class MyLabelEncoder(TransformerMixin):
+    def __init__(self, *args, **kwargs):
+        self.encoder = LabelEncoder(*args, **kwargs)
+    
+    def fit(self,x,y=None):
+        self.encoder.fit(x)
+        return self
+    
+    def transform(self,x,y=None):
+        transformed = self.encoder.transform(x)
+        return transformed.reshape(-1, 1)
+
+    
+        
 
 class DataPreprocessing:
     def __init__(self, config:DataPreprocessorConfig) -> None:
@@ -77,10 +103,39 @@ class DataPreprocessing:
         return np.log1p(x)
     
     @staticmethod
-    def custom_genre_on_hot_encode(x):
-        df_encoded = pd.get_dummies(x.apply(pd.Series).stack()).sum(level=0)
-        return df_encoded
+    def convert_to_list(gener):
+        logger.info("Shape of genre sent to convert_list : {}".format(gener.shape))
+
+        return gener.apply(ast.literal_eval)
+
     
+    @staticmethod
+    def custom_genre_on_hot_encode(x):
+        # Convert string representations of lists to actual lists
+        x = x.apply(DataPreprocessing.convert_to_list)
+
+        logger.info("Shape of genre returned by convert_to_list {}".format(x.shape))
+        # Explode the lists into separate rows
+        x_exploded = x.explode('genres')
+
+        # Apply one-hot encoding
+        df_encoded = pd.get_dummies(x_exploded, prefix='', prefix_sep='')
+
+        # Aggregate the one-hot encoded values back to the original structure
+        df_aggregated = df_encoded.groupby(level=0).max()
+
+        return df_aggregated
+   
+    @staticmethod
+    def get_shape_begin(x):
+        logger.info("Shape of column before preprocessing : {} ".format(x.shape))
+        return x
+
+    @staticmethod
+    def get_shape_end(x):
+        logger.info("Shape of column after preprocessing : {} ".format(x.shape))
+        return x
+      
 
     def get_data_preprocessor_object(self):
         """
@@ -89,54 +144,67 @@ class DataPreprocessing:
 
         continous_num_pipeline = Pipeline(
             steps=[
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
                 ('log_normal',FunctionTransformer(DataPreprocessing.log_normal_transform)),
                 ('imputer',SimpleImputer(strategy='median')),
-                ('sacler',StandardScaler())
+                ('sacler',StandardScaler()),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
         list_category_pipeline = Pipeline(
             steps=[
-                ('imputer',SimpleImputer(strategy='most_frequent')),
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
                 ('stack_encoder',FunctionTransformer(DataPreprocessing.custom_genre_on_hot_encode)),
-                ('scaler',StandardScaler(with_mean=False))
+                ('scaler',StandardScaler(with_mean=False)),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
         normal_category_pipeline = Pipeline(
             steps=[
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
                 ('imputer',SimpleImputer(strategy='most_frequent')),
                 ('one_hot_encoder',OneHotEncoder()),
-                ('scaler',StandardScaler(with_mean=False))
+                ('scaler',StandardScaler(with_mean=False)),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
         label_category_pipeline = Pipeline(
             steps=[
-                ('label_encoder',LabelEncoder()),
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
+                ('label_encoder',MyLabelEncoder()),
                 ('imputer',SimpleImputer(strategy='median')),
-                ('scaler',StandardScaler())
+                ('scaler',StandardScaler()),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
         hero_pipeline = Pipeline(
             steps=[
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
                 ('get_scores',ScoresFromCsvTransformer(category='hero')),
-                ('scaler',StandardScaler())
+                ('scaler',StandardScaler()),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
         crew_pipeline = Pipeline(
             steps=[
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
                 ('get_scores',ScoresFromCsvTransformer(category='crew')),
-                ('scaler',StandardScaler())
+                ('scaler',StandardScaler()),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
         heroine_pipeline  = Pipeline(
             steps=[
+                ('start_shape', FunctionTransformer(DataPreprocessing.get_shape_begin, validate=False, accept_sparse=True)),
                 ('get_scores',ScoresFromCsvTransformer(category='heroine')),
-                ('scaler',StandardScaler())
+                ('scaler',StandardScaler()),
+                ('end_shape', FunctionTransformer(DataPreprocessing.get_shape_end, validate=False, accept_sparse=True))
             ]
         )
 
@@ -152,10 +220,13 @@ class DataPreprocessing:
                 ('heroine_pipeline',heroine_pipeline,self.heroine_col)
             ]
         )
+        logger.info("Preprocessing Complete")
+
+        return preprocessor
 
         ## Save the Preprocessor 
-        preprocessor_path = os.path.join(self.config.root_dir,'preprocessor.pkl')
-        joblib.dump(preprocessor,preprocessor_path)
+        # preprocessor_path = os.path.join(self.config.root_dir,'preprocessor.pkl')
+        # joblib.dump(preprocessor,preprocessor_path)
 
        
     

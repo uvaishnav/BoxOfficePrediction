@@ -59,8 +59,8 @@ class FeatureEngineering:
         Remove all entries with zero entries or NaN entries as they have no impact on trget variable.
         """
 
-        nan_features = [feature for feature in self.cinema_db.columns if self.cinema_db[feature].isnull().sum()>1]
-        zero_features = [feature for feature in self.cinema_db if (self.cinema_db[feature]==0).sum()>1]
+        nan_features = [feature for feature in self.cinema_db.columns if self.cinema_db[feature].isnull().sum()>=1]
+        zero_features = [feature for feature in self.cinema_db if (self.cinema_db[feature]==0).sum()>=1]
 
         cond1 = (self.cinema_db[nan_features].isnull()).any(axis=1)
         cond2 = (self.cinema_db[zero_features]==0).any(axis=1)
@@ -97,10 +97,13 @@ class FeatureEngineering:
         1) Handle variation in ticket prices over time by considering footfall
         for a fair comparision between movies across time and calculate revenue by predicting footfall
 
-        2) remove 'revenue' and 'avg_ticket_price' as they are not nesessary for training further as their relevence is captured as footfall
+        2) Remove any zero entries within the new feature 
+
+        3) remove 'revenue' and 'avg_ticket_price' as they are not nesessary for training further as their relevence is captured as footfall
         """
 
         self.cinema_db['footfall'] = self.cinema_db['revenue']//self.cinema_db['avg_ticket_price']
+        self.cinema_db = self.cinema_db[self.cinema_db['footfall']!=0]
         remove_columns(self.cinema_db,['revenue','avg_ticket_price'])
 
     def handle_list_categorical_features(self):
@@ -165,7 +168,7 @@ class FeatureEngineering:
         root_path = self.config.featured_data
 
         # split data into train and test subsets in ratio 80:20
-        train, test = train_test_split(self.cinema_db)
+        train, test = train_test_split(self.cinema_db,test_size=0.2)
 
         # save them
         train_path = os.path.join(root_path,"train.csv")

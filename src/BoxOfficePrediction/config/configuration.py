@@ -1,6 +1,12 @@
 from BoxOfficePrediction.constants import *
 from BoxOfficePrediction.utils.common import read_yaml, create_directories
-from BoxOfficePrediction.entity.config_entity import DataIngestionConfig,DataOrganizeConfig,DataValidatioinConfig,FeatureEngineeringConfig,DataPreprocessorConfig
+from BoxOfficePrediction.entity.config_entity import (DataIngestionConfig,
+                                                      DataOrganizeConfig,
+                                                      DataValidatioinConfig,
+                                                      FeatureEngineeringConfig,
+                                                      DataPreprocessorConfig,
+                                                      ModelTrainingConfig)
+                                                      
 
 class ConfugarationManager:
     def __init__(self,config_file_path = CONFIG_FILE_PATH, param_file_path = PARAMS_FILE_PATH, schema_file_path = SCHEMA_FILE_PATH):
@@ -78,3 +84,19 @@ class ConfugarationManager:
         )
 
         return data_preprocessor_config
+    
+    def get_model_training_config(self)->ModelTrainingConfig:
+        config = self.config.model_training
+
+        model_training_config = ModelTrainingConfig (
+            train_data = config.train_data,
+            preprocessor_path = config.preprocessor_path,
+            model_path = config.model_path,
+            n_iter = self.params.n_iter,
+            scoring = self.params.scoring,
+            cv = self.params.cv,
+            target_column = self.params.target_column
+        )
+
+        return model_training_config
+    

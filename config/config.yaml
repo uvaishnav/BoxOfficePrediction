@@ -27,4 +27,9 @@ feature_engineering:
 
 data_preprocessing:
   root_dir: models
+
+model_training :
+  train_data : artifacts/data_transform/train.csv
+  preprocessor_path : models/preprocessor.pkl
+  model_path : models
   

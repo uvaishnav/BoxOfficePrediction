@@ -1,1 +1,4 @@
-key : value
+n_iter: 10
+scoring: neg_mean_squared_error
+cv: 5
+target_column: footfall
