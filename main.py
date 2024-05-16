@@ -4,6 +4,7 @@ from BoxOfficePrediction.pipeline.stage02_data_organize import DataOrganizePipel
 from BoxOfficePrediction.pipeline.stage_data_validatioin import DataValidatioinPipeline
 from BoxOfficePrediction.pipeline.stage03_feature_engineering import FeatureEngineeringPipeline
 from BoxOfficePrediction.pipeline.stage05_model_training import ModelTrainingPipeline
+from BoxOfficePrediction.pipeline.stage06_model_evaluation import ModelEvaluationPipeline
 
 STAGE_NAME = "Data Ingestion Stage"
 try:
@@ -59,6 +60,16 @@ try:
     logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
     model_trainer = ModelTrainingPipeline()
     model_trainer.main()
+    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+except Exception as e:
+    raise e
+
+
+STAGE_NAME = "MODEL EVALUATION"
+try:
+    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+    model_evaluator = ModelEvaluationPipeline()
+    model_evaluator.main()
     logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
     raise e

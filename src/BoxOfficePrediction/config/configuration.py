@@ -5,7 +5,8 @@ from BoxOfficePrediction.entity.config_entity import (DataIngestionConfig,
                                                       DataValidatioinConfig,
                                                       FeatureEngineeringConfig,
                                                       DataPreprocessorConfig,
-                                                      ModelTrainingConfig)
+                                                      ModelTrainingConfig,
+                                                      ModelEvaluationConfig)
                                                       
 
 class ConfugarationManager:
@@ -99,4 +100,24 @@ class ConfugarationManager:
         )
 
         return model_training_config
+    
+    def get_model_evaluation_config(self)->ModelEvaluationConfig:
+        config = self.config.model_evaluation
+
+        model_evaluation_config = ModelEvaluationConfig(
+            test_data = config.test_data,
+            target_column = self.params.target_column,
+            preprocessor_path = config.preprocessor_path,
+            best_params_path = config.best_params_path,
+            Adaboost = config.Adaboost,
+            CatBoost = config.CatBoost,
+            DscisionTree = config.DscisionTree,
+            GradientBoosting = config.GradientBoosting,
+            LinearRegression = config.LinearRegression,
+            RandomForest = config.RandomForest,
+            XGBoost = config.XGBoost,
+            mlflow_uri = config.mlflow_uri
+        )
+
+        return model_evaluation_config
     

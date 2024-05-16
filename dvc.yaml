@@ -2,8 +2,7 @@ stages:
   data_ingestion:
     cmd: python src/BoxOfficePrediction/pipeline/stage01_data_ingestion.py
     deps: 
-      - src/BoxOfficePrediction/pipeline/stage01_data_ingestion.py
-      - config/config.yaml
+      - src/BoxOfficePrediction/components/data_ingestion.py
     outs :
       - artifacts/data_ingestion/tmdb_5000_credits.csv
       - artifacts/data_ingestion/tmdb_5000_movies.csv
@@ -12,8 +11,7 @@ stages:
   data_organize:
     cmd: python src/BoxOfficePrediction/pipeline/stage02_data_organize.py
     deps:
-      - src/BoxOfficePrediction/pipeline/stage02_data_organize.py
-      - config/config.yaml
+      - src/BoxOfficePrediction/components/data_organize.py
       - artifacts/data_ingestion/ticket_prices.csv
       - artifacts/data_ingestion/tmdb_5000_credits.csv
       - artifacts/data_ingestion/tmdb_5000_movies.csv
@@ -23,8 +21,7 @@ stages:
   data_validation:
     cmd: python src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
     deps:
-      - src/BoxOfficePrediction/pipeline/stage_data_validatioin.py
-      - config/config.yaml
+      - src/BoxOfficePrediction/components/data_validation.py
       - schema.yaml
     outs:
       - artifacts/data_validation/status.txt
@@ -32,9 +29,7 @@ stages:
   feature_engineering:
     cmd : python src/BoxOfficePrediction/pipeline/stage03_feature_engineering.py
     deps :
-      - src/BoxOfficePrediction/pipeline/stage03_feature_engineering.py
       - src/BoxOfficePrediction/components/feature_engineering.py
-      - config/config.yaml
       - artifacts/data_transform/organized_cinema.csv
     outs:
       - artifacts/data_scores/director_score.csv
@@ -46,9 +41,9 @@ stages:
   model_training:
     cmd: python src/BoxOfficePrediction/pipeline/stage05_model_training.py
     deps:
-      - src/BoxOfficePrediction/pipeline/stage05_model_training.py
-      - config/config.yaml
+      - src/BoxOfficePrediction/components/model_training.py
       - src/BoxOfficePrediction/pipeline/stage04_data_preprocessing.py
+      - params.yaml
     outs:
       - models/preprocessor.pkl
       - models/RandomForest_model.pkl
@@ -58,3 +53,9 @@ stages:
       - models/XGBoost_model.pkl
       - models/CatBoost_model.pkl
       - models/AdaBoost_model.pkl
+
+  model_evaluation :
+    cmd : python src/BoxOfficePrediction/pipeline/stage06_model_evaluation.py
+    deps :
+      - src/BoxOfficePrediction/components/model_evaluation.py
+      - models/best_params.yaml

@@ -44,3 +44,18 @@ class ModelTrainingConfig:
     scoring : str
     cv : int
     target_column : str
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    test_data : Path
+    target_column : str
+    preprocessor_path : Path
+    best_params_path : Path
+    Adaboost : Path
+    CatBoost : Path
+    DscisionTree : Path
+    GradientBoosting : Path
+    LinearRegression : Path
+    RandomForest : Path
+    XGBoost : Path
+    mlflow_uri :str

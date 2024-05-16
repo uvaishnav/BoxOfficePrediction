@@ -117,7 +117,7 @@ class ModelTraining:
     def get_train_data(self):
         train_data = pd.read_csv(self.config.train_data)
 
-        logger.info("loaded test and train data")
+        logger.info("loaded train data")
 
         # Seperating Target Column from INput Features
         input_feature_train_df = train_data.drop([self.config.target_column],axis=1)
@@ -135,7 +135,7 @@ class ModelTraining:
 
         preprocessor_obj = ModelTraining.get_preprocessor_object()
 
-        logger.info("Preprocessing the Training and testing dataframes")
+        logger.info("Preprocessing the Training dataframes")
 
         input_feature_train_arr = preprocessor_obj.fit_transform(input_feature_train_df)
 
@@ -153,17 +153,19 @@ class ModelTraining:
 
         x_train,y_train = self.get_train_data()
 
+        ## Checking for NaN or infinite values in the train data.
+
         x_train_nan = np.isnan(x_train).any()
         y_train_nan = np.isnan(y_train).any()
 
         logger.info("Train data has NaN values : {}".format(x_train_nan))
-        logger.info("Trauin target has NaN value : {} ".format(y_train_nan))
+        logger.info("Train target has NaN value : {} ".format(y_train_nan))
 
         x_train_inf = np.isinf(x_train).any()
         y_train_inf = np.isinf(y_train).any()
 
         logger.info("Train data has inf values : {}".format(x_train_inf))
-        logger.info("Trauin target has inf value : {} ".format(y_train_inf))
+        logger.info("Train target has inf value : {} ".format(y_train_inf))
 
         # Perform Randomized SearchCV for each estimator and save the best model
         logger.info("Initiated randomized SearchCV for each model")

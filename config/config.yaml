@@ -33,3 +33,15 @@ model_training :
   preprocessor_path : models/preprocessor.pkl
   model_path : models
   
+model_evaluation :
+  test_data : artifacts/data_transform/test.csv
+  preprocessor_path : models/preprocessor.pkl
+  best_params_path : models/best_params.yaml
+  Adaboost : models/AdaBoost_model.pkl
+  CatBoost : models/CatBoost_model.pkl
+  DscisionTree : models/DecisionTree_model.pkl
+  GradientBoosting : models/GradientBoosting_model.pkl
+  LinearRegression : models/LinearRegression_model.pkl
+  RandomForest : models/RandomForest_model.pkl
+  XGBoost : models/XGBoost_model.pkl
+  mlflow_uri : https://dagshub.com/uvaishnav/BoxOfficePrediction.mlflow
