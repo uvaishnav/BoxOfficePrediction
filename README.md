@@ -7,7 +7,7 @@ With the extensive data from TMDB_5000 dataset from kaggle, neumorous recomedati
 
 ## Documentation
 This section contains detailed information about the approach, experimentation results, and inferences derived from the project.
-I have created a blog explaining the approach and execution, please visit my Blog :[cid:18f85865baaebafc23c1](https://hashnode.com/preview/664617b317715f9a04ee27b9)
+I have created a blog explaining the approach and execution, please visit my Blog :[](https://hashnode.com/preview/664617b317715f9a04ee27b9)
 
 
 ## MLflow experiment Logs
