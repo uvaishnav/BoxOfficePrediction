@@ -1,4 +1,4 @@
-n_iter: 10
+n_iter: 50
 scoring: neg_mean_squared_error
 cv: 5
 target_column: footfall

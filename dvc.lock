@@ -128,7 +128,7 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: 8b75eb553ae8a5b59e4550c18240e659
+      md5: 20b2ac3f31f6748dc20d71a18528fc56
       size: 73
     - path: src/BoxOfficePrediction/components/model_training.py
       hash: md5
@@ -141,52 +141,52 @@ stages:
     outs:
     - path: models/AdaBoost_model.pkl
       hash: md5
-      md5: db7bccb937894fc9b0a942f44cad4c0a
-      size: 178002
+      md5: 7823425d6a107942e90e4462af027262
+      size: 370557
       isexec: true
     - path: models/CatBoost_model.pkl
       hash: md5
-      md5: ea56440c2bc83fb29c0c825222ed7c2f
-      size: 493883
+      md5: ad83e6f2d5493658c736bd35c2ab1690
+      size: 744563
       isexec: true
     - path: models/DecisionTree_model.pkl
       hash: md5
-      md5: 05bf3b30a9a1d6d354551a3f3b926ebd
-      size: 7459
+      md5: 4c60d4af731d9920c2a22b1126da78f6
+      size: 4435
       isexec: true
     - path: models/GradientBoosting_model.pkl
       hash: md5
-      md5: 26dba846ad6d8f11c3a2b611f06b208f
-      size: 17479270
+      md5: a3b741cf452040f9327155543c853a86
+      size: 3139239
       isexec: true
     - path: models/LinearRegression_model.pkl
       hash: md5
-      md5: 5e3fb03334ad44e0576a24849d50a691
-      size: 846
+      md5: be0feb31b667faaadcc28f67df3e444e
+      size: 867
       isexec: true
     - path: models/RandomForest_model.pkl
       hash: md5
-      md5: f17786def8b147d43194414da9feef91
-      size: 5619243
+      md5: e871bac0f5c6dd63f1fd39553d6d0ce0
+      size: 15845868
       isexec: true
     - path: models/XGBoost_model.pkl
       hash: md5
-      md5: 7bcaf833555cb9dffa00ae0e2bdbe29e
-      size: 719351
+      md5: b621bc70d6b55449bd0c8968fd0242ad
+      size: 932219
       isexec: true
     - path: models/preprocessor.pkl
       hash: md5
-      md5: 4de54bd7b98b13980cfb2d0a689dc4c8
-      size: 13610
+      md5: b57fb37acf0314b97a656b830f0a660e
+      size: 14880
       isexec: true
   model_evaluation:
     cmd: python src/BoxOfficePrediction/pipeline/stage06_model_evaluation.py
     deps:
     - path: models/best_params.yaml
       hash: md5
-      md5: 3aee11e2a907b0909f27da450fafb8af
-      size: 504
+      md5: 31d1b8c52ca3304b94457376f14bda4f
+      size: 487
     - path: src/BoxOfficePrediction/components/model_evaluation.py
       hash: md5
-      md5: 350ff14ce35401339e14722e59c93eae
+      md5: 1fc15f04a71e2a8b552a2607837c5848
       size: 3601

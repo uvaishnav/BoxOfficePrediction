@@ -45,3 +45,8 @@ model_evaluation :
   RandomForest : models/RandomForest_model.pkl
   XGBoost : models/XGBoost_model.pkl
   mlflow_uri : https://dagshub.com/uvaishnav/BoxOfficePrediction.mlflow
+
+prediction_pipeline:
+  preprocessor_path : models/preprocessor.pkl
+  model_path : models/XGBoost_model.pkl
+  

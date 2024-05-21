@@ -6,7 +6,8 @@ from BoxOfficePrediction.entity.config_entity import (DataIngestionConfig,
                                                       FeatureEngineeringConfig,
                                                       DataPreprocessorConfig,
                                                       ModelTrainingConfig,
-                                                      ModelEvaluationConfig)
+                                                      ModelEvaluationConfig,
+                                                      PredictPipelineConfig)
                                                       
 
 class ConfugarationManager:
@@ -120,4 +121,13 @@ class ConfugarationManager:
         )
 
         return model_evaluation_config
+    
+    def get_prediction_pipeline_config(self)->PredictPipelineConfig:
+        config = self.config.prediction_pipeline
+
+        prediction_pipeline_config = PredictPipelineConfig(
+            preprocessor_path = config.preprocessor_path,
+            model_path= config.model_path
+        )
+        return prediction_pipeline_config
     

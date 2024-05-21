@@ -82,7 +82,7 @@ class ModelEvaluation:
                 mlflow.sklearn.log_model(model, "model", registered_model_name=model_name)
             else:
                 mlflow.sklearn.log_model(model, "model")
-                logger.info("Inable to regestitor model to mlflow")
+                logger.info("Unable to regestitor model to mlflow")
 
     
     def initiate_evaluation(self):

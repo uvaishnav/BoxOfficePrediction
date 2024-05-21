@@ -59,3 +59,8 @@ class ModelEvaluationConfig:
     RandomForest : Path
     XGBoost : Path
     mlflow_uri :str
+
+@dataclass(frozen=True)
+class PredictPipelineConfig:
+    preprocessor_path : Path
+    model_path : Path
