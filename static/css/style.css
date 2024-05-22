@@ -63,6 +63,12 @@ nav {
 .hide-nav {
     display: none;
 }
+.hide-nav-links {
+    display: none;
+}
+.nav-toggle{
+    display: none;
+}
 
 .main-content{
     display: flex;
@@ -130,6 +136,7 @@ h2{
     color: #FFA500;
     /* text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.8); */
 }
+
 
 form {
     background: rgba(255, 255, 255, 0.1);
@@ -287,7 +294,11 @@ input[type="submit"]:hover {
     }
 }
 
-Hover effect for buttons
+@keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+
 input[type="submit"]:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
@@ -303,6 +314,33 @@ input[type="submit"]:hover {
 .input-group input:focus {
     border-color: #FFD700;
     transition: border-color 0.3s ease;
+}
+
+footer {
+    background-color: #222;
+    color: #888;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin-top: 10px;
+}
+footer h3{
+    color: #FFA500;
+    margin: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 10px;
+}
+.footer-links a:hover {
+    color: #FFD700;
 }
 
 .loading-overlay {
@@ -330,6 +368,7 @@ input[type="submit"]:hover {
     font-size: 3em;
     color: #FFD700;
     margin: 0 5px;
+    animation: rotate 2s linear infinite;
 }
 
 .loading-overlay .icons.active {
@@ -428,12 +467,38 @@ input[type="submit"]:hover {
     }
 }
 
-/* @media (max-width: 1366px) {
-    .input-group label {
-        flex-basis: calc(50% - 20px);
+@media screen and (max-width: 768px) {
+    /* Hide the logo text to make space */
+
+    /* Show the hamburger icon */
+    .nav-toggle {
+        display: block;
     }
 
-    .input-group select {
-        width: 100%;
+    /* Hide the navigation links by default */
+    .nav-links {
+        display: none;
     }
-} */
+
+    /* Style the navigation links in the collapsed menu */
+    .nav-links.collapsed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 70px; /* Adjust as needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Example background color */
+    }
+
+    /* Style the individual links in the collapsed menu */
+    .nav-links.collapsed li {
+        margin: 10px 0;
+    }
+
+    /* Style the hamburger icon */
+    .nav-toggle .fas {
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}

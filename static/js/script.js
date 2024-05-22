@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.getElementById('closeButton');
     const predictionResults = document.getElementById('predictionResults');
     const loadingOverlay = document.getElementById('loadingOverlay');
+    const loadingIcons = document.getElementById('loadingIcons')
     const formSection = document.querySelector('.form-bg');
     const navBar = document.getElementById('navBar');
     const mainSection = document.querySelector('main'); 
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
     resultsModal.style.display = 'none';
 
@@ -15,7 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
         navBar.classList.add('hide-nav');
     });
 
-        // Show modal with animation
+    // Toggle the collapsed class on click
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('collapsed');
+    });
+
+    // Show modal with animation
     function showModal() {
         resultsModal.classList.add('show');
     }
@@ -37,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         loadingOverlay.style.display = 'flex';
+        loadingIcons.style.display = 'flex';
 
         const formData = new FormData(form);
         const data = {};
@@ -59,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             loadingOverlay.style.display = 'none';
+            loadingIcons.style.display = 'none'
             if (data.error) {
                 alert('Error: ' + data.error);
                 return;
