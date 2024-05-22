@@ -7,26 +7,58 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://kit.fontawesome.com/7bec55560d.js" crossorigin="anonymous"></script>
     <style>
-        body {
+        main{
             background: url("{{ url_for('static', filename='cinema_bg.gif') }}") no-repeat center center fixed;
             font-family: 'Arial', sans-serif;
             background-color: #2C2C2C;
-            color: #FFFFFF;
-            margin: 0;
-            padding: 0;
             background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 5rem;
+        }
+        .form-bg{
+            background: url("{{ url_for('static', filename='form-bg.gif') }}") no-repeat center center fixed;
+            background-color: #2C2C2C;
+            background-position: left top;
+            background-size: cover;
+            width: 100vw;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cinema Production Budget Predictor</h1>
-        <div class="info">
-            <h2>About Our Application</h2>
-            <p>
-                The world of cinema production is complex and highly variable. One of the key challenges producers face is managing budgets effectively. Unplanned budgets can lead to financial strain, compromising the quality and success of a film. Our application helps producers predict a safe budget limit before investing, considering various factors like genres, production country, runtime, languages, and key personnel involved.
-            </p>
+    <header>
+        <nav id="navBar">
+            <div class="logo">
+                <h1>UV</h1>
+                <p>Predictions</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Industries</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Insights</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="main-content">
+            <h1 class="main-heading">Cinema Production Budget Predictor</h1>
+            <div class="paragraph">
+                <h2>About Our Application</h2>
+                <p>
+                    The world of cinema production is complex and highly variable. One of the key challenges producers face is managing budgets effectively. Unplanned budgets can lead to financial strain, compromising the quality and success of a film. Our application helps producers predict a safe budget limit before investing, considering various factors like genres, production country, runtime, languages, and key personnel involved.
+                </p>                
+                <a href="#" id="predictButton" class="start-pred-btn">Start Prediction</a>
+            </div>
         </div>
+    </main>
+    <div class="form-bg" id="formBg">
+    <div class="form-container" id="predictFormContainer">
         <form id="predictForm" action="/predict" method="POST">
             <div class="input-group">
                 <label for="budget">Estimated Budget ($):</label>
@@ -116,6 +148,7 @@
             <i class="fa-solid fa-clapperboard icon"></i>
         </div>
         <div class="text">Lights... Camera... Predicting...</div>
+    </div>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

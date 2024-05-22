@@ -1,13 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    color: #fff;
+}
 
-.container {
-    width: 90%;
+.form-container {
+    width: 100%;
     max-width: 800px;
     margin: auto;
     padding: 20px;
     background: rgba(44, 44, 44, 0.85);
-    border-radius: 10px;
+    border-radius: 0px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
 }
+header {
+    background:transparent;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+.logo h1, .logo p {
+    margin: 10px;
+    margin-left: 20px;
+}
+.logo h1{
+    font-size: 2rem;
+}
+.logo p {
+    font-size: 1rem;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 1rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #FFD700;
+}
+
+.hide-nav {
+    display: none;
+}
+
+.main-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 75%;
+}
+
+.main-content h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+.main-heading{
+    font-size: 50px;
+    font-family:'Times New Roman', Times, serif;
+    margin-bottom: 10px;
+}
+
+.paragraph {
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    width: 75%;
+    margin-top: 10px;
+}
+.paragraph h2{
+    font-size: 30px;
+    text-decoration: underline;
+}
+.paragraph:hover{
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.start-pred-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid #FFD700;
+    border-radius: 4px;
+    color: #FFD700;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+.start-pred-btn:hover {
+    background: #FFA500;
+    color: #000;
+    border: 2px solid #FFA500;
+    transform: scale(1.05);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 h1{
     text-align: center;
     color: #FFD700;
@@ -18,18 +129,6 @@ h2{
     text-align: center;
     color: #FFA500;
     /* text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.8); */
-}
-
-.info {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.info p {
-    max-width: 800px;
-    margin: auto;
-    line-height: 1.6;
-    color: #CCCCCC;
 }
 
 form {
@@ -251,8 +350,13 @@ input[type="submit"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
-
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
 .modal-content {
     background-color: #2C2C2C;
     margin: auto;
@@ -264,6 +368,11 @@ input[type="submit"]:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     text-align: center;
     color: #FFFFFF;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+.modal.show .modal-content {
+    transform: translateY(0);
 }
 
 .close-button {

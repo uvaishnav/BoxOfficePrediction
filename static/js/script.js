@@ -4,8 +4,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.getElementById('closeButton');
     const predictionResults = document.getElementById('predictionResults');
     const loadingOverlay = document.getElementById('loadingOverlay');
+    const formSection = document.querySelector('.form-bg');
+    const navBar = document.getElementById('navBar');
+    const mainSection = document.querySelector('main'); 
 
     resultsModal.style.display = 'none';
+
+    document.getElementById('predictButton').addEventListener('click', function() {
+        document.getElementById('predictFormContainer').scrollIntoView({ behavior: 'smooth' });
+        navBar.classList.add('hide-nav');
+    });
+
+        // Show modal with animation
+    function showModal() {
+        resultsModal.classList.add('show');
+    }
+    // Hide modal with animation
+    function hideModal() {
+        resultsModal.classList.remove('show');
+        setTimeout(() => {
+            resultsModal.style.display = 'none';
+        }, 300); // Match the transition duration
+    }
+
+    closeButton.addEventListener('click', hideModal);
+    window.addEventListener('click', (event) => {
+        if (event.target == resultsModal) {
+            hideModal();
+        }
+    });
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -53,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             resultsModal.style.display = 'flex';
+            setTimeout(showModal, 10); // Allow a short delay to ensure display: flex is applied
         })
         .catch(error => {
             loadingOverlay.style.display = 'none';
@@ -70,4 +98,25 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsModal.style.display = 'none';
         }
     });
+
+    window.addEventListener('scroll', function() {
+        if (isHalfInViewport(mainSection)) {
+            navBar.classList.remove('hide-nav');
+        } else if (isHalfInViewport(formSection)) {
+            navBar.classList.add('hide-nav');
+        }
+    });
+
+    // Helper function to check if an element is at least half in the viewport
+    function isHalfInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
+        const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
+
+        const vertInView = (rect.top <= windowHeight / 2) && ((rect.bottom - (rect.height / 2)) >= 0);
+        const horInView = (rect.left <= windowWidth / 2) && ((rect.right - (rect.width / 2)) >= 0);
+
+        return (vertInView && horInView);
+    }
+
 });
