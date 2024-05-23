@@ -1,27 +1,27 @@
 AdaBoost:
   learning_rate: 0.01
-  n_estimators: 281
+  n_estimators: 138
 CatBoost:
-  depth: 6
-  iterations: 663
+  depth: 5
+  iterations: 814
   learning_rate: 0.01
 DecisionTree:
-  max_depth: 5
-  min_samples_leaf: 3
-  min_samples_split: 9
+  max_depth: 6
+  min_samples_leaf: 4
+  min_samples_split: 19
 GradientBoosting:
   learning_rate: 0.01
-  max_depth: 6
-  n_estimators: 408
+  max_depth: 7
+  n_estimators: 389
 LinearRegression:
   fit_intercept: true
 RandomForest:
   max_depth: 9
-  min_samples_leaf: 2
-  min_samples_split: 16
-  n_estimators: 986
+  min_samples_leaf: 3
+  min_samples_split: 11
+  n_estimators: 855
 XGBoost:
-  colsample_bytree: 0.9
+  colsample_bytree: 0.4
   learning_rate: 0.01
-  max_depth: 5
-  n_estimators: 368
+  max_depth: 6
+  n_estimators: 558

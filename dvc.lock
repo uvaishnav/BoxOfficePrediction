@@ -128,8 +128,9 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: 20b2ac3f31f6748dc20d71a18528fc56
-      size: 73
+      md5: 211d8928a3c054c8354b056d7765a63a
+      size: 74
+      isexec: true
     - path: src/BoxOfficePrediction/components/model_training.py
       hash: md5
       md5: 773dd677762852c7381a3a61ede7103a
@@ -141,23 +142,23 @@ stages:
     outs:
     - path: models/AdaBoost_model.pkl
       hash: md5
-      md5: 7823425d6a107942e90e4462af027262
-      size: 370557
+      md5: 2b24db66ddfd335a46007d46918aa4aa
+      size: 183935
       isexec: true
     - path: models/CatBoost_model.pkl
       hash: md5
-      md5: ad83e6f2d5493658c736bd35c2ab1690
-      size: 744563
+      md5: 642c392673eda7057394155d0945718a
+      size: 488563
       isexec: true
     - path: models/DecisionTree_model.pkl
       hash: md5
-      md5: 4c60d4af731d9920c2a22b1126da78f6
-      size: 4435
+      md5: 7c233af252a01ded0e28b00dd1574fed
+      size: 7171
       isexec: true
     - path: models/GradientBoosting_model.pkl
       hash: md5
-      md5: a3b741cf452040f9327155543c853a86
-      size: 3139239
+      md5: 83f452fb0ea788052442225002171e3d
+      size: 5265502
       isexec: true
     - path: models/LinearRegression_model.pkl
       hash: md5
@@ -166,13 +167,13 @@ stages:
       isexec: true
     - path: models/RandomForest_model.pkl
       hash: md5
-      md5: e871bac0f5c6dd63f1fd39553d6d0ce0
-      size: 15845868
+      md5: e1c399716f9ec15a65366e10082a9ae3
+      size: 16172703
       isexec: true
     - path: models/XGBoost_model.pkl
       hash: md5
-      md5: b621bc70d6b55449bd0c8968fd0242ad
-      size: 932219
+      md5: b6e7df4a82494f9c0a2a1130f5d8732c
+      size: 2186208
       isexec: true
     - path: models/preprocessor.pkl
       hash: md5
@@ -184,8 +185,8 @@ stages:
     deps:
     - path: models/best_params.yaml
       hash: md5
-      md5: 31d1b8c52ca3304b94457376f14bda4f
-      size: 487
+      md5: 30a1c74915c342f883b30d4eef7a8611
+      size: 488
     - path: src/BoxOfficePrediction/components/model_evaluation.py
       hash: md5
       md5: 1fc15f04a71e2a8b552a2607837c5848
