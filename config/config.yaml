@@ -47,6 +47,6 @@ model_evaluation :
   mlflow_uri : https://dagshub.com/uvaishnav/BoxOfficePrediction.mlflow
 
 prediction_pipeline:
-  preprocessor_path : models/preprocessor.pkl
-  model_path : models/XGBoost_model.pkl
+  preprocessor_path : final_models/preprocessor.pkl
+  model_path : final_models/XGBoostRegressor.pkl
   
