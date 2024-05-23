@@ -15,5 +15,8 @@ RUN apt-get update -y && \
 # Install the Python dependencies
 RUN pip install -r requirements.txt
 
+# Expose port 8080
+EXPOSE 9090
+
 # Specify the command to run your application
 CMD ["python3", "app.py"]
