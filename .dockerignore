@@ -1,0 +1,33 @@
+# Ignore Jupyter notebooks
+*.ipynb
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment directories
+venv/
+env/
+.venv/
+
+# Ignore log files and databases
+*.log
+*.sqlite3
+
+# Ignore IDE and editor specific files
+.idea/
+.vscode/
+*.swp
+
+# Ignore git and other version control files
+.git/
+.gitignore
+
+# Ignore Docker files
+Dockerfile
+.dockerignore
+
+# Allow README.md
+!README.md
+

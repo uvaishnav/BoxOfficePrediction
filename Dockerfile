@@ -16,7 +16,7 @@ RUN apt-get update -y && \
 RUN pip install -r requirements.txt
 
 # Expose port 8080
-EXPOSE 9090
+EXPOSE $PORT
 
 # Specify the command to run your application
-CMD ["python3", "app.py"]
+CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:app
