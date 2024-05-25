@@ -44,7 +44,7 @@ model_evaluation :
   LinearRegression : models/LinearRegression_model.pkl
   RandomForest : models/RandomForest_model.pkl
   XGBoost : models/XGBoost_model.pkl
-  mlflow_uri : https://dagshub.com/uvaishnav/BoxOfficePrediction.mlflow
+  mlflow_uri : 'fill your mlflow uri'
 
 prediction_pipeline:
   preprocessor_path : final_models/preprocessor.pkl
