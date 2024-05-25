@@ -165,10 +165,9 @@ dvc init
 dvc repro
 ```
 ## 🎥 Demo
-<video width="640" height="480" controls>
-  <source src="https://github.com/uvaishnav/BoxOfficePrediction/assets/104910465/19513d4b-bac0-412d-b891-40ba9151d2fd" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+[Watch the demo video](https://github.com/uvaishnav/BoxOfficePrediction/assets/104910465/19513d4b-bac0-412d-b891-40ba9151d2fd)
+
 
 ## 🚀 Deployment
 
