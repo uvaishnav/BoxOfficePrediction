@@ -15,10 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Check if README file was modified
+      - name: Check if README file was modified
+        id: readme_modified
+        run: echo "::set-output name=modified::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep README.md)"
+
+
 
 ### ⬇ IMPORTANT PART ⬇ ###
-
+        # Deploy to Heroku only if README file was not the only file modified
       - name: Build, Push and Release a Docker container to Heroku. # Your custom step name
+        if: ${{ steps.readme_modified.outputs.modified != 'README.md' }}   
         uses: gonuit/heroku-docker-deploy@v1.3.3 # GitHub action name (leave it as it is).
         with:
           # Below you must provide variables for your Heroku app.
